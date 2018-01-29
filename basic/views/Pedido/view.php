@@ -29,7 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'id_cliente.nome',
+            [
+			'attribute'=>'id_cliente',
+			'value'=>$model->cliente->nome,
+			'type'=>DetailView::INPUT_SELECT2, 
+			'widgetOptions'=>[
+			  'data'=>ArrayHelper::map(Cliente::find()->orderBy('nome')->asArray()->all(), 'id_cliente', 'nome'),
+			]
+		 ]
             'id_produto',
         ],
     ]) ?>
